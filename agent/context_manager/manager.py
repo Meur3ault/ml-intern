@@ -334,7 +334,7 @@ class ContextManager:
                     missing.append(
                         Message(
                             role="tool",
-                            content="Tool was not executed (interrupted or error).",
+                            content="Tool was not executed: execution error.",
                             tool_call_id=tc.id,
                             name=tc.function.name,
                         )

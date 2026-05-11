@@ -1596,6 +1596,13 @@ class Handlers:
                                         },
                                     )
                                 )
+                                cancelled_tool_msg = Message(
+                                    role="tool",
+                                    content="Tool was cancelled by user.",
+                                    tool_call_id=tc.id,
+                                    name=name,
+                                )
+                                session.context_manager.add_message(cancelled_tool_msg)
                         await _cleanup_on_cancel(session)
                         break
 
@@ -1938,6 +1945,13 @@ class Handlers:
                             },
                         )
                     )
+                    cancelled_tool_msg = Message(
+                        role="tool",
+                        content="Tool was cancelled by user.",
+                        tool_call_id=tc.id,
+                        name=tool_name,
+                    )
+                    session.context_manager.add_message(cancelled_tool_msg)
                 await _cleanup_on_cancel(session)
                 await session.send_event(Event(event_type="interrupted"))
                 session.increment_turn()
